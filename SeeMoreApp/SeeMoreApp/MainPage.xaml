@@ -6,7 +6,7 @@
 
     <ContentView>
         <Grid BackgroundColor="Bisque">
-            <ListView x:Name="MainPageModel" HasUnevenRows="True">
+            <ListView ItemsSource="{Binding MainPageModel}" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

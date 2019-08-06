@@ -23,7 +23,7 @@ namespace SeeMoreApp
             typeof(bool),
             typeof(LargeTextLabel),
             false,
-            BindingMode.OneWay,
+            BindingMode.Default,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 if (newValue != null && bindable is LargeTextLabel control)
@@ -44,7 +44,7 @@ namespace SeeMoreApp
                                                         returnType: typeof(string),
                                                         declaringType: typeof(LargeTextLabel),
                                                         defaultValue: string.Empty,
-                                                        defaultBindingMode: BindingMode.OneWay,
+                                                        defaultBindingMode: BindingMode.Default,
                                                         propertyChanged: TextPropertyChanged);
 
         public string Text

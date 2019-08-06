@@ -10,10 +10,12 @@ namespace SeeMoreApp
 {
     public partial class MainPage : ContentPage
     {
+        public ObservableCollection<MainPageModel> MainPageModel { get; set; }
+
         public MainPage()
         {
             InitializeComponent();
-            MainPageModel.ItemsSource = new ObservableCollection<MainPageModel>()
+            MainPageModel = new ObservableCollection<MainPageModel>()
             {
                 new MainPageModel() { LabelText = "Hello how are you?\nText Long Text To test the see more and see less. Test Test Test Test Test Test Test Test Test Test Test Test .\n\nThanks in advance."},
                 new MainPageModel() { LabelText = "Hello how are you?\nText Long Text To test the see more and see less. Test Test Test Test Test Test Test Test Test Test Test Test .\n\nThanks in advance."},
@@ -25,6 +27,7 @@ namespace SeeMoreApp
                 new MainPageModel() { LabelText = "Hello how are you?\nText Long Text To test the see more and see less. Test Test Test Test Test Test Test Test Test Test Test Test .\n\nThanks in advance."},
                 new MainPageModel() { LabelText = "Hello how are you?\nText Long Text To test the see more and see less. Test Test Test Test Test Test Test Test Test Test Test Test .\n\nThanks in advance."},
             };
+            BindingContext = this;
         }
     }
 }
