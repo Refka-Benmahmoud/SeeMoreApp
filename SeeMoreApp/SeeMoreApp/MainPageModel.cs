@@ -7,13 +7,13 @@ using System.Windows.Input;
 
 namespace SeeMoreApp
 {
-    internal class MainPageModel : INotifyPropertyChanged
+    public class MainPageModel : INotifyPropertyChanged
     {
         public MainPageModel()
-    {
-        Title = "Main Page";
-        LabelText = "Hello how are you?\nText Long Text To test the see more and see less. Test Test Test .\n\nThanks in advance.";
-    }
+        {
+            //Title = "Main Page";
+            //LabelText = "Hello how are you?\nText Long Text To test the see more and see less. Test Test Test .\n\nThanks in advance.";
+        }
 
     #region Bound Properties
 

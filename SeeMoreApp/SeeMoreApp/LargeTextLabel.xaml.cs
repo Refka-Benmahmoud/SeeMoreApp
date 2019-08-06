@@ -15,14 +15,15 @@ namespace SeeMoreApp
 		public LargeTextLabel ()
 		{
 			InitializeComponent ();
+            Content.BindingContext = this;
 		}
         #region Expanded
         public static readonly BindableProperty ExpandedProperty = BindableProperty.Create(
-                        nameof(LargeTextLabel),
+                        nameof(Expanded),
             typeof(bool),
-            typeof(ContentView),
+            typeof(LargeTextLabel),
             false,
-            BindingMode.TwoWay,
+            BindingMode.OneWay,
             propertyChanged: (bindable, oldValue, newValue) =>
             {
                 if (newValue != null && bindable is LargeTextLabel control)
@@ -38,42 +39,62 @@ namespace SeeMoreApp
         #endregion Expanded
 
         #region Text
-        public static readonly BindableProperty TextProperty = BindableProperty.Create(
-                        nameof(LargeTextLabel),
-            typeof(string),
-            typeof(ContentView),
-            default(string),
-            BindingMode.TwoWay,
-            propertyChanged: (bindable, oldValue, newValue) =>
-            {
-                if (newValue != null && bindable is LargeTextLabel control)
-                {
-                    var actualNewValue = (string)newValue;
-                    control.SmallLabel.Text = actualNewValue;
-                    control.FullLabel.Text = actualNewValue;
-                }
-            });
+        public static BindableProperty TextProperty = BindableProperty.Create(
+                                                        propertyName: nameof(Text),
+                                                        returnType: typeof(string),
+                                                        declaringType: typeof(LargeTextLabel),
+                                                        defaultValue: string.Empty,
+                                                        defaultBindingMode: BindingMode.OneWay,
+                                                        propertyChanged: TextPropertyChanged);
 
-        public string Text { get; set; }
+        public string Text
+        {
+            get { return base.GetValue(TextProperty).ToString(); }
+            set { base.SetValue(TextProperty, value); }
+        }
+
+        private static void TextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var control = (LargeTextLabel)bindable;
+            if (control == null) return;
+            if ((string)newValue != null)
+            {
+                var actualNewValue = (string)newValue;
+                control.SmallLabel.Text = actualNewValue;
+                control.FullLabel.Text = actualNewValue;
+            }
+            control.OnPropertyChanged(nameof(control.Text));
+        }
         #endregion Text
 
         #region Command
-        public static readonly BindableProperty CommandProperty = BindableProperty.Create(
-                        nameof(LargeTextLabel),
-            typeof(ICommand),
-            typeof(ContentView),
-            default(Command),
-            BindingMode.TwoWay,
-            propertyChanged: (bindable, oldValue, newValue) =>
-            {
-                if (newValue != null && bindable is LargeTextLabel control)
-                {
-                    var actualNewValue = (ICommand)newValue;
-                    control.ExpandContractButton.Command = actualNewValue;
-                }
-            });
+        //public static readonly BindableProperty CommandProperty = BindableProperty.Create(
+        //                nameof(Command),
+        //    typeof(ICommand),
+        //    typeof(LargeTextLabel),
+        //    default(Command),
+        //    BindingMode.OneWay,
+        //    propertyChanged: (bindable, oldValue, newValue) =>
+        //    {
+        //        if (newValue != null && bindable is LargeTextLabel control)
+        //        {
+        //            var actualNewValue = (ICommand)newValue;
+        //            control.ExpandContractButton.Command = actualNewValue;
+        //        }
+        //    });
 
-        public ICommand Command { get; set; }
+        //public ICommand Command { get; set; }
+
+
+        public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command),
+                                                                          typeof(ICommand),
+                                                                          typeof(LargeTextLabel),
+                                                                          default(ICommand));
+        public ICommand Command
+        {
+            get => (ICommand)GetValue(CommandProperty);
+            set => SetValue(CommandProperty, value);
+        }
         #endregion Command
     }
 }

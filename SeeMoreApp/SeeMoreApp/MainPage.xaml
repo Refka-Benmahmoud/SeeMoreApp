@@ -5,12 +5,21 @@
              x:Class="SeeMoreApp.MainPage">
 
     <ContentView>
-        <Grid
-            BackgroundColor="Bisque">
-            <local:LargeTextLabel
-                Command ="{Binding ExpandContractCommand}"
-                Text    ="{Binding LabelText}"
-                Expanded="{Binding TextExpanded}" />
+        <Grid BackgroundColor="Bisque">
+            <ListView x:Name="MainPageModel" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <local:LargeTextLabel
+                                Command ="{Binding ExpandContractCommand}"
+                                Text    ="{Binding LabelText}"
+                                Expanded="{Binding TextExpanded}" />
+                        </ViewCell>
+                        <!--<TextCell Text="{Binding LabelText}"/>-->
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
         </Grid>
     </ContentView>
 

@@ -7,19 +7,16 @@
         <local:MainPageModel/>
     </ContentView.BindingContext>
     <ContentView.Content>
-      
         <StackLayout
             Orientation="Vertical">
             <Label
-                BackgroundColor="Beige"
-                HeightRequest="50"
+                BackgroundColor="Beige" HeightRequest="50"
                 x:Name="SmallLabel" IsVisible="true"/>
             <Label
-                BackgroundColor="BurlyWood"
-           HeightRequest="200"
+                BackgroundColor="BurlyWood" HeightRequest="200" 
                 x:Name="FullLabel" IsVisible="false"/>
             <Button
-                Text="See More"
+                Text="See More" Command="{Binding Command}"
                 x:Name="ExpandContractButton" />
         </StackLayout>
     </ContentView.Content>
