@@ -17,17 +17,23 @@ namespace SeeMoreApp
 
     #region Bound Properties
 
-        private bool textExpanded;
-        public bool TextExpanded
-        {
-            get { return textExpanded; }
-            set { textExpanded = value; OnPropertyChanged(); }
-        }
+        //private bool textExpanded;
+        //public bool TextExpanded
+        //{
+        //    get { return textExpanded; }
+        //    set { textExpanded = value; OnPropertyChanged(); }
+        //}
         private string labelText;
         public string LabelText
         {
             get { return labelText; }
             set { labelText = value; OnPropertyChanged(); }
+        }
+        private int rowHeight = 20;
+        public int RowHeight
+        {
+            get { return rowHeight; }
+            set { rowHeight = value; OnPropertyChanged(); }
         }
         private string title;
         public string Title
@@ -42,20 +48,20 @@ namespace SeeMoreApp
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ICommand ExpandContractCommand
-    {
-        get
-        {
-            if (_ExpandContractCommand == null)
-            {
-                _ExpandContractCommand = new Xamarin.Forms.Command(() => {
-                    TextExpanded = !TextExpanded;
-                });
-            }
+        //public ICommand ExpandContractCommand
+        //{
+        //    get
+        //    {
+        //        if (_ExpandContractCommand == null)
+        //        {
+        //            _ExpandContractCommand = new Xamarin.Forms.Command(() => {
+        //                TextExpanded = !TextExpanded;
+        //            });
+        //        }
 
-            return _ExpandContractCommand;
-        }
-    }
+        //        return _ExpandContractCommand;
+        //    }
+        //}
         #endregion Commands
         protected void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {

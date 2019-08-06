@@ -17,26 +17,6 @@ namespace SeeMoreApp
 			InitializeComponent ();
             Content.BindingContext = this;
 		}
-        #region Expanded
-        public static readonly BindableProperty ExpandedProperty = BindableProperty.Create(
-                        nameof(Expanded),
-            typeof(bool),
-            typeof(LargeTextLabel),
-            false,
-            BindingMode.Default,
-            propertyChanged: (bindable, oldValue, newValue) =>
-            {
-                if (newValue != null && bindable is LargeTextLabel control)
-                {
-                    var actualNewValue = (bool)newValue;
-                    control.SmallLabel.IsVisible = !actualNewValue;
-                    control.FullLabel.IsVisible = actualNewValue;
-                    control.ExpandContractButton.Text = actualNewValue ? "See Less" : "See More";
-                }
-            });
-
-        public bool Expanded { get; set; }
-        #endregion Expanded
 
         #region Text
         public static BindableProperty TextProperty = BindableProperty.Create(
@@ -67,34 +47,28 @@ namespace SeeMoreApp
         }
         #endregion Text
 
-        #region Command
-        //public static readonly BindableProperty CommandProperty = BindableProperty.Create(
-        //                nameof(Command),
-        //    typeof(ICommand),
-        //    typeof(LargeTextLabel),
-        //    default(Command),
-        //    BindingMode.OneWay,
-        //    propertyChanged: (bindable, oldValue, newValue) =>
-        //    {
-        //        if (newValue != null && bindable is LargeTextLabel control)
-        //        {
-        //            var actualNewValue = (ICommand)newValue;
-        //            control.ExpandContractButton.Command = actualNewValue;
-        //        }
-        //    });
-
-        //public ICommand Command { get; set; }
-
-
-        public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command),
-                                                                          typeof(ICommand),
-                                                                          typeof(LargeTextLabel),
-                                                                          default(ICommand));
-        public ICommand Command
+        private bool textExpanded;
+        public bool TextExpanded
         {
-            get => (ICommand)GetValue(CommandProperty);
-            set => SetValue(CommandProperty, value);
+            get { return textExpanded; }
+            set { textExpanded = value; OnPropertyChanged(); }
         }
-        #endregion Command
+        private void ExpandContractButton_Clicked(object sender, EventArgs e)
+        {
+            if (TextExpanded)
+            {
+                TextExpanded = false;
+                SmallLabel.IsVisible = true;
+                FullLabel.IsVisible = false;
+
+            }
+            else
+            {
+                TextExpanded = true;
+                FullLabel.IsVisible = true;
+                SmallLabel.IsVisible = false;
+            }
+            ExpandContractButton.Text = TextExpanded ? "See Less" : "See More";
+        }
     }
 }

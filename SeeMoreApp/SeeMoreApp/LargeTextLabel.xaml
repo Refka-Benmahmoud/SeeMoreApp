@@ -14,7 +14,7 @@
                 BackgroundColor="BurlyWood" HeightRequest="200" 
                 x:Name="FullLabel" IsVisible="false"/>
             <Button
-                Text="See More" Command="{Binding Command}"
+                Text="See More" Clicked="ExpandContractButton_Clicked"
                 x:Name="ExpandContractButton" />
         </StackLayout>
     </ContentView.Content>

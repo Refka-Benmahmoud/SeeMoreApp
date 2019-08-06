@@ -10,10 +10,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <local:LargeTextLabel
-                                Command ="{Binding ExpandContractCommand}"
-                                Text    ="{Binding LabelText}"
-                                Expanded="{Binding TextExpanded}" />
+                            <local:LargeTextLabel Text ="{Binding LabelText}" />
                         </ViewCell>
                         <!--<TextCell Text="{Binding LabelText}"/>-->
                     </DataTemplate>
